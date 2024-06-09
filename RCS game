@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+
+
+from tkinter import *
+
+import random
+ 
+root = Tk()
+ 
+
+root.geometry("600x600")
+ 
+#setting title
+root.title("Rock-Paper-Scissor Game")
+
+
+comp_value = {
+    
+    "0": "Rock",
+    "1": "Paper",
+    "2": "Scissor"
+    
+}
+ 
+def game_reset():
+    
+    b1["state"] = "active"
+    b2["state"] = "active"
+    b3["state"] = "active"
+    l1.config(text="Player              ")
+    l3.config(text="Computer")
+    l4.config(text="")
+    
+def disable_button():
+    b1["state"] = "disable"
+    b2["state"] = "disable"
+    b3["state"] = "disable"
+    
+#for rock
+
+def isrock():
+    cv = comp_value[str(random.randint(0, 2))]
+    if cv == "Rock":
+        match_result = "Match Draw"
+    elif cv == "Scissor":
+        match_result = "Player Win"
+    else:
+        match_result = "Computer Win"
+    l4.config(text=match_result)
+    l1.config(text="Rock ")
+    l3.config(text=cv)
+    disable_button()
+
+#for paper    
+def ispaper():
+    cv = comp_value[str(random.randint(0, 2))]
+    if cv == "Paper":
+        match_result = "Match Draw"
+    elif cv == "Scissor":
+        match_result = "Computer Win"
+    else:
+        match_result = "Player Win"
+    l4.config(text=match_result)
+    l1.config(text="Paper ")
+    l3.config(text=cv)
+    disable_button()
+    
+#for scissor    
+def isscissor():
+    cv = comp_value[str(random.randint(0, 2))]
+    if cv == "Rock":
+        match_result = "Computer Win"
+    elif cv == "Scissor":
+        match_result = "Match Draw"
+    else:
+        match_result = "Player Win"
+    l4.config(text=match_result)
+    l1.config(text="Scissor ")
+    l3.config(text=cv)
+    disable_button()
+
+    
+Label(root,
+      text="Rock Paper Scissor",
+      font="normal 25 bold",
+      fg="black").pack(pady=20)
+ 
+frame = Frame(root)
+frame.pack()
+ 
+l1 = Label(frame,
+           text="Player     ",
+           font=15)
+ 
+l2 = Label(frame,
+           text="VS        ",
+           font="arial 15 ")
+ 
+l3 = Label(frame, text="Computer", font=15)
+
+l1.pack(side=LEFT)
+l2.pack(side=LEFT)
+l3.pack()
+
+l4 = Label(root,
+           text="",
+           font="normal 20 bold",
+           bg="white",
+           width=15,
+           borderwidth=2,
+           relief="solid")
+l4.pack(pady=20)
+ 
+frame1 = Frame(root)
+frame1.pack()
+
+
+b1 = Button(frame1, text="Rock",
+            font=12, width=8,
+            command=isrock)
+ 
+b2 = Button(frame1, text="Paper ",
+            font=12, width=8,
+            command=ispaper)
+ 
+b3 = Button(frame1, text="Scissor",
+            font=12, width=8,
+            command=isscissor)
+
+b1.pack(side=LEFT, padx=14)
+b2.pack(side=LEFT, padx=14)
+b3.pack(padx=14)
+
+Button(root, text="Reset Game",
+       font=12, fg="green",
+       bg="white", command=game_reset).pack(pady=20)
+ 
+# Execute Tkinter
+root.mainloop()
